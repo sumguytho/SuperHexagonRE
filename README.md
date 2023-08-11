@@ -1,12 +1,12 @@
 # Intro
 
-Before I go I got to say all of this was made possible because Terry posted
+Before I begin I got to say all of this was made possible because Terry posted
 an unstripped binary for linux version of the game which made the whole
 process a lot faster than it would have been otherwise. All the explanations and
 code examples are based on linux version of the game but they mostly apply to
 windows as well since they share the same codebase when it comes to game
 logic (though there are some slight differences, perhaps, they are only due to
-different optimizations). Whenever i show code don't mind the irrelevant variable
+different optimizations). Whenever I show code don't mind the irrelevant variable
 names, I've given up trying to split register variables in ghidra out.
 
 The notes here may contradict whatever is written in header files for game structures.
@@ -14,16 +14,16 @@ The values, variable types and their offsets are correct but their decriptions m
 be off, whatever is written in this README takes precedence over header files.
 
 The offsets for windows might be off though, everything that isn't a part of the
-patch (explanations wise) was tested on linux.
+patch (explanations and offsets wise) was tested on linux.
 
 ## Directory contents
 
- - other/dump_prints.gdb - a gdb script i used to get the locations of calls to
+ - other/dump_prints.gdb - a gdb script I used to get the locations of calls to
 graphicsclass::print along with strings being printed and their colours
  - other/cull_redundant_prints.py - a python script used to cull redundant strings
 in the text file produced by gdb script
- - SuperHexagon.exe.gzf and SuperHexagon.gzf - Ghidra projects with all the stuff
-I could figure out about the game, version 10.3.2 is required to open them
+ - SuperHexagon.exe.gzf and SuperHexagon.gzf - [Ghidra](https://github.com/NationalSecurityAgency/ghidra)
+projects with all the stuff I could figure out about the game, version 10.3.2 is required to open them
  - SuperHexagonLinux.h and SuperHexagonWindows.h - structures exported from Ghidra
 projects, everything present in one file but not another is same for both versions of the game
 
@@ -31,9 +31,9 @@ projects, everything present in one file but not another is same for both versio
 
 ## Timer and game jiffies
 
+The game is locked at 60 fps and counts time in 1/60th of a second jiffies.
 The fractional part of the timer goes 0 to 59 which is very weird
 considering we as humans are used to decimal fractions of a second, i suspect
-this is because the game counts time in 1/60th of a second jiffies and
 the function that sets timer text just divides time by 60 and uses quotient
 as minutes and remainder as "milliseconds".
 
@@ -134,6 +134,9 @@ to some playable one and then back to -2 you will get this:
 
 file://menu_play
 
+It doesn't generate waves in the main menu though, once the already generated ones pass everything is back to how it
+used to be.
+
 ## What makes the last stage
 
 Once you reach the 2 minute mark on hexagonest (one minute if you start in hypermode)
@@ -185,12 +188,12 @@ modifying this game are limitless.
 # Structure fields
 
 The rest of the document is dedicated to describing the fields of superhex structure that
-I was able to deduce. Some are pretty self evident and I just wanted to provide additional
-context, some I've left out because I just didn't have anything on them.
+I have made some observations on. Some are pretty self evident and I just wanted to
+provide additional context, some I've left out because I just didn't have anything on them.
 
 ## graphics_palette_state
 
-I have no idea what this one does, the only thing i was able to figure out is
+I have no idea what this one does, the only thing I was able to figure out is
 that when the game needs to change the graphics theme while the game is running
 it won't do so unless this variable is set to 0.
 
@@ -255,8 +258,7 @@ I couldn't figure out the logic of this one. It's set to different values at dif
 screens (at stage select, while playing, at score screen) and I would think that these values are
 used by the game to differentiate between the states of the game if it wasn't for the fact that those
 values are different between game restarts (each "game state value" is like +/- 1 between restarts, e.g.,
-while playing it's 180 and in stage select it's 80, after a restart it's 181 and 81 for the same scenes
-respectively).
+while playing it's 180 and in stage select it's 80, after a restart it's 181 and 81 for the same respective scenes).
 
 ---
 
@@ -292,7 +294,7 @@ The time in jiffies before the next wave is generated. A wave may be comprised o
 
 ## waves_generated
 
-See explanations earlier.
+The amount of waves generated up to this point in time.
 
 ---
 
@@ -348,9 +350,10 @@ inconsistency that visual effect stateful variables are int and this one is floa
 
 ## camera_rotation_type
 
-Controls the way the camera is spun, for example, when it's 0 the camera slowly spins counter-clockwise,
-when it's 1 it does the same in the opposite direction and this pattern persists until it's lower than 7,
-values greater or equal to 7 just lock it in place the way it's seen in the last stage.
+Controls the way the camera is spun, for example, when it's 0 the camera slowly spins counter-clockwise
+(or clockwise, don't remember, doesn't matter), when it's 1 it does the same in the opposite direction
+and this pattern persists until it's lower than 7, values greater or equal to 7 just lock it in place
+the way it's seen in the last stage.
 
 ---
 
@@ -406,7 +409,7 @@ obstacle_generation_delay, though.
 
 ## stage_current
 
-See explanations earlier.
+The number of stage that you are currently playing.
 
 ---
 
@@ -421,7 +424,8 @@ a locked label instead of the stage itself in stage select.
 
 ## stage_selected
 
-See explanations earlier.
+The number of stage currently selected in stage select, used to determine how to start the game
+(which stage_current to pick, whether to set switch_to_hypermode flag).
 
 ---
 

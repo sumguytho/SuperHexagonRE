@@ -122,17 +122,17 @@ stage_current and jiffies_after_game_is_lost (a horrible variable name, couldn't
 There sure is more to this than just changing 2 variables but there's still this overall weirdness that simply
 changing the value of a variable that holds the number of the current stage can launch the game:
 
-file://change_stage
+![change_stage](https://github.com/sumguytho/SuperHexagonRE/blob/master/gifs/change_stage.gif)
 
 If you set jiffies_after_game_is_lost to 0 after the game is lost, the game will continue as if nothing has happened,
 you will even retain the time you spent on the stage:
 
-file://set_jiffies
+![set_jiffies](https://github.com/sumguytho/SuperHexagonRE/blob/master/gifs/set_jiffies.gif)
 
 I have no idea whether the game started and the game going on are distinct states but if you switch stage
 to some playable one and then back to -2 you will get this:
 
-file://menu_play
+![menu_play](https://github.com/sumguytho/SuperHexagonRE/blob/master/gifs/menu_play.gif)
 
 It doesn't generate waves in the main menu though, once the already generated ones pass everything is back to how it
 used to be.
@@ -241,7 +241,7 @@ The bigger the value, the bigger the hexagon in the centre of the screen. There 
 some value this one should go to on every stage and if you change it the game will bring it back to
 that value with corresponding visual effect:
 
-file://camera_zoom
+![camera_zoom](https://github.com/sumguytho/SuperHexagonRE/blob/master/gifs/camera_zoom.gif)
 
 ---
 
@@ -306,7 +306,7 @@ The game has no protection against this variable being set to some value the gam
 If you set it too low the game will crash due to obstacles overflowing whatever buffer they are written
 to when created. Random demo:
 
-file://speedy_bois
+![speedy_bois](https://github.com/sumguytho/SuperHexagonRE/blob/master/gifs/speedy_bois.gif)
 
 ---
 
@@ -375,7 +375,7 @@ See Rank enum.
 
 Does a zoom out when set to 1:
 
-file://zoomout
+![zoomout](https://github.com/sumguytho/SuperHexagonRE/blob/master/gifs/zoomout.gif)
 
 ---
 
@@ -383,7 +383,7 @@ file://zoomout
 
 Does a spin when set to 1:
 
-file://spin
+![spin](https://github.com/sumguytho/SuperHexagonRE/blob/master/gifs/spin.gif)
 
 ---
 
@@ -391,7 +391,7 @@ file://spin
 
 Set to 1 for hexagonest and its hypermode, makes the field switch colours on adjacent lanes:
 
-file://colours
+![colours](https://github.com/sumguytho/SuperHexagonRE/blob/master/gifs/colours.gif)
 
 ---
 

@@ -27,6 +27,8 @@ projects with all the stuff I could figure out about the game, version 10.3.2 is
  - SuperHexagonLinux.h and SuperHexagonWindows.h - structures exported from Ghidra
 projects, everything present in one file but not another is same for both versions of the game
 
+[Here](https://youtu.be/UTmOfOdiTy8) is a small demonstration of aforementioned scripts.
+
 # Game mechanics
 
 ## Timer and game jiffies
